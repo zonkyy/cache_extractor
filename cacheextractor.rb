@@ -35,7 +35,7 @@ class CacheExtractor
     file_list = []
     Find.find(@cache_dir) do |f|
       next unless File.file?(f)
-      next if File.basename(f).to_s[0] == '_'
+      next if File.basename(f) =~ /_/
       file_list << f
     end
 
