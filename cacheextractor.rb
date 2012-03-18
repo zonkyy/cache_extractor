@@ -20,7 +20,7 @@ EXTRACTED_PATH = ENV["HOME"] + '/Downloads/ExtractedCache'
 # CACHE_PATHの書き方が正しいかの確認にでも．)
 DEBUG_MODE = false
 # 抽出したファイルをキャッシュから削除するなら true
-MOVE_MODE = true
+MOVE_MODE = false
 
 ### その他
 # 抽出ファイルの拡張子(ピリオドから記述．指定しない場合は'')
@@ -60,11 +60,15 @@ class CacheExtractor
     taken = sorted_file_list.take(num)
 
     # キャッシュから抽出
-    STDOUT.puts "output: #{@extracted_dir}"
+    puts "cache: #{@cache_dir}"
+    puts "output: #{@extracted_dir}"
+    puts "---"
     FileUtils.mkdir_p(@extracted_dir)
     taken.each do |f|
-      puts "#{f} #{File::stat(f).size}"
       output_path = @extracted_dir + '/' + File.basename(f) + EXTENSION
+      cache_rpath = f.to_s[(@cache_dir.length+1)..-1]
+      output_rpath = output_path[(@extracted_dir.length+1)..-1]
+      puts "cache//#{cache_rpath} -> output//#{output_rpath} (#{File::stat(f).size})"
       if MOVE_MODE
         FileUtils.mv(f, output_path)
       else
