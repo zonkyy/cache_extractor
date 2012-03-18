@@ -21,6 +21,10 @@ EXTRACTED_PATH = ENV["HOME"] + '/Downloads/ExtractedCache'
 DEBUG_MODE = false
 # 抽出したファイルをキャッシュから削除するなら true
 MOVE_MODE = true
+
+### その他
+# 抽出ファイルの拡張子(ピリオドから記述．指定しない場合は'')
+EXTENSION = '.flv'
 ######### ここまで #########
 
 
@@ -60,10 +64,11 @@ class CacheExtractor
     FileUtils.mkdir_p(@extracted_dir)
     taken.each do |f|
       puts "#{f} #{File::stat(f).size}"
+      output_path = @extracted_dir + '/' + File.basename(f) + EXTENSION
       if MOVE_MODE
-        FileUtils.mv(f, @extracted_dir)
+        FileUtils.mv(f, output_path)
       else
-        FileUtils.cp(f, @extracted_dir)
+        FileUtils.cp(f, output_path)
       end
     end
   end
