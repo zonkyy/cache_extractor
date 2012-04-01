@@ -39,6 +39,7 @@ class PolipoCache < Cache
     path = Pathname.new(file)
     offset = take_header(file, /X-Polipo-Body-Offset:/).to_i
     Tempfile.open("del_header_tmp") {|tmpf|
+      tmpf.binmode
       File.open(path, "rb") {|f|
         f.read(offset)
         tmpf.write(f.read)
@@ -62,7 +63,6 @@ class PolipoCache < Cache
 
   def cp(file, to)
     Tempfile.open("tmp") {|tmpf|
-      tmpf.binmode
       FileUtils.cp(file, tmpf)
       tmpf.close
       delete_header(tmpf)
