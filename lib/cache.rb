@@ -9,6 +9,7 @@ class Cache
     @cache_path = Pathname.new(options[:cache_dir])
     @extracted_path = Pathname.new(options[:extracted_dir])
     @max_extraction = options[:max_extraction]
+    @extract_mode = @polipo_opts[:extract_mode].to_sym
     @polipo_opts = {}
   end
 
@@ -33,13 +34,16 @@ class Cache
     flist
   end
 
-  def extract(mode = :copy)
+  def extract()
     file_list.each do |f|
       puts "#{f} #{File::stat(f).size}"
-      if mode == :copy
+      case @extract_mode
+      when :copy
         cp(f, @extracted_path)
-      else
+      when :move
         mv(f, @extracted_path)
+      else
+        raise "抽出モード(copy or move)が正しく設定されていません: #{@extract_mode}"
       end
     end
   end
