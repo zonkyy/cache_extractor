@@ -16,6 +16,27 @@ class PolipoCache < Cache
     @polipo_opts[:content_type] = options[:content_type]
   end
 
+  def file_list
+    flist = []
+    Find.find(@cache_path) do |f|
+      next unless File.file?(f)
+      if @polipo_opts[:website]
+        next unless match_site?(f, @polipo_opts[:website])
+      end
+      if @polipo_opts[:content_type]
+        next unless match_content_type?(f, @polipo_opts[:content_type])
+      end
+      flist << f
+    end
+
+    flist = flist.sort_by do |item|
+      -File::stat(item).size
+    end
+
+    flist = flist[0...@max_extraction] if @max_extraction > 0
+    flist
+  end
+
   def match_site?(f, website)
     fpath = Pathname.new(f)
     cache_site = fpath.dirname.basename
