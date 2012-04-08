@@ -9,7 +9,7 @@ class Cache
     @cache_path = Pathname.new(options[:cache_dir])
     @extracted_path = Pathname.new(options[:extracted_dir])
     @max_extraction = options[:max_extraction]
-    @extract_mode = @polipo_opts[:extract_mode].to_sym
+    @extract_mode = options[:extract_mode].to_sym
     @polipo_opts = {}
   end
 
