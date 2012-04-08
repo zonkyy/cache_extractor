@@ -92,9 +92,10 @@ class PolipoCache < Cache
 
   def mv(file, to)
     delete_header(file)
-    super
+    super(file, dest_path)
   end
 
+  # 拡張子をつけたパスを返す
   def dest_path(file, to)
     fname = Pathname.new(file).basename.to_s + '.' + extension(file)
     to + fname
