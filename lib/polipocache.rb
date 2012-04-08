@@ -4,7 +4,6 @@ require 'tempfile'
 require 'cache'
 
 class PolipoCache < Cache
-  # YOUTUBE_REGEXP = /o-o\.preferred\..*\.c.youtube\.com/
   YOUTUBE_REGEXP = /\.c.youtube\.com/
   VEOH_REGEXP = /veoh-\d{3}\.vo\.llnwd\.net/
   NICONICO_REGEXP = /smile-pow\d{2}\.nicovideo\.jp/

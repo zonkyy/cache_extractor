@@ -56,47 +56,4 @@ class CacheExtractor
       raise "キャッシュタイプが不正です: #{cache_type}"
     end
   end
-
-  # def extract(num)
-  #   # ファイルリスト作成
-  #   file_list = []
-  #   Find.find(@cache_dir) do |f|
-  #     next unless File.file?(f)
-  #     next if File.basename(f) =~ /_/
-  #     file_list << f
-  #   end
-
-  #   # ファイルリストをサイズでソート
-  #   sorted_file_list = file_list.sort_by do |item|
-  #     -File::stat(item).size
-  #   end
-
-  #   # デバッグモード ON ならリストを表示して終了
-  #   if DEBUG_MODE
-  #     sorted_file_list.each do |f|
-  #       puts "#{f} #{File::stat(f).size}"
-  #     end
-  #     return
-  #   end
-
-  #   # 大きいものからn個を抽出
-  #   taken = sorted_file_list.take(num)
-
-  #   # キャッシュから抽出
-  #   puts "cache: #{@cache_dir}"
-  #   puts "output: #{@extracted_dir}"
-  #   puts "---"
-  #   FileUtils.mkdir_p(@extracted_dir)
-  #   taken.each do |f|
-  #     output_path = @extracted_dir + '/' + File.basename(f) + EXTENSION
-  #     cache_rpath = f.to_s[(@cache_dir.length+1)..-1]
-  #     output_rpath = output_path[(@extracted_dir.length+1)..-1]
-  #     puts "cache//#{cache_rpath} -> output//#{output_rpath} (#{File::stat(f).size})"
-  #     if MOVE_MODE
-  #       FileUtils.mv(f, output_path)
-  #     else
-  #       FileUtils.cp(f, output_path)
-  #     end
-  #   end
-  # end
 end
