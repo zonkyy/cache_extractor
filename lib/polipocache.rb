@@ -11,6 +11,7 @@ class PolipoCache < Cache
   def initialize(options)
     super
 
+    @polipo_opts = {}
     @polipo_opts[:website] = options[:website]
     @polipo_opts[:content_type] = options[:content_type]
   end
