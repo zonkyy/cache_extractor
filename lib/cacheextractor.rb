@@ -18,7 +18,7 @@ class CacheExtractor
     conf_path = Pathname.new(options[:conf_path] || DEFAULT_CONF_PATH)
     raise ArgumentError, "設定ファイルが存在しません: #{conf_path}" unless conf_path.exist?
 
-    confs = load_conf(options[:conf_path])
+    confs = load_conf(conf_path)
     @cache = create_cache_obj(confs)
   end
 
