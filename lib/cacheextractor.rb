@@ -53,7 +53,7 @@ class CacheExtractor
     when "polipo"
       PolipoCache.new(options)
     else
-      raise "キャッシュタイプが不正です: #{cache_type}"
+      raise "キャッシュタイプが不正です: #{options[:cache_type]}"
     end
   end
 end
