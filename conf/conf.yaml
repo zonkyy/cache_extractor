@@ -10,12 +10,13 @@ extract_mode: copy
 extension: flv
 
 # 抽出する個数(大きいものからn個，指定しないなら0)
-max_extraction: 10
+max_extraction: 2
 
 
 ### パス関係
 # キャッシュが置かれている絶対パス
 # cache_dir: /home/akisute/.mozilla/firefox/ijq290rk.default/Cache
+# cache_dir: /home/akisute/program/ruby/cache_extractor/test/polipo_cache
 cache_dir: /media/Storage/Ubuntu/.polipo-cache
 
 # 抽出先のパス
