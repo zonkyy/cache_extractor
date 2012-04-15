@@ -7,6 +7,7 @@ class FirefoxCache < Cache
     flist = []
     Find.find(@cache_path) do |f|
       next unless File.file?(f)
+      next if f =~ /_CACHE_00\d_/
       flist << f
     end
 
