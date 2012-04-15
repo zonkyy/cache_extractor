@@ -4,15 +4,17 @@ require 'tempfile'
 require 'cache'
 
 class PolipoCache < Cache
-  YOUTUBE_REGEXP = /\.c.youtube\.com/
-  VEOH_REGEXP = /veoh-\d{3}\.vo\.llnwd\.net/
-  NICONICO_REGEXP = /smile-pow\d{2}\.nicovideo\.jp/
-
   def initialize(options)
     super
 
     @polipo_opts = {}
-    @polipo_opts[:website] = options[:website]
+    if options[:website]
+      @polipo_opts[:website] = options[:website].map do |item|
+        Regexp.new(item)
+      end
+    else
+      @polipo_opts[:website] = nil
+    end
     @polipo_opts[:content_type] = options[:content_type]
   end
 
@@ -37,18 +39,10 @@ class PolipoCache < Cache
     flist
   end
 
-  def match_site?(f, website)
+  def match_site?(f, regexp_list)
     fpath = Pathname.new(f)
-    cache_site = fpath.dirname.basename
-    case cache_site.to_s
-    when YOUTUBE_REGEXP
-      return true if website.include?("youtube")
-    when VEOH_REGEXP
-      return true if website.include?("veoh")
-    when NICONICO_REGEXP
-      return true if website.include?("niconico")
-    end
-    false
+    cache_dir_name = fpath.dirname.basename.to_s
+    regexp_list.any? {|re| re =~ cache_dir_name}
   end
 
   def match_content_type?(f, content_type)

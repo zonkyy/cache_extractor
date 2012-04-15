@@ -23,11 +23,11 @@ extracted_dir: /home/akisute/Downloads/ExtractedCache
 
 
 ### polipo用オプション(使用しなければ全要素コメントアウト)
-# 抽出サイト(youtube, veoh, niconico)
+# 抽出サイト(ディレクトリに一致する正規表現を記述)
 website:
-  # - youtube
-  # - veoh
-  # - niconico
+  - \.c.youtube\.com            # youtube の例
+  - veoh-\d{3}\.vo\.llnwd\.net  # veoh の例
+  - smile-pow\d{2}\.nicovideo\.jp # niconico の例
 # 抽出するファイルの種類(flv, mp4, Video, etc...)
 content_type:
   - video
