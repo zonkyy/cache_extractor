@@ -1,0 +1,33 @@
+### 基本設定
+# 使用するキャッシュのタイプ
+# cache_type: firefox
+cache_type: polipo
+
+# 抽出したファイルをキャッシュから削除するなら move，そうでなければ copy．
+extract_mode: copy
+
+# 抽出ファイルに付与する拡張子．polipoの[option]-[type]設定時は無効．
+extension: flv
+
+# 抽出する個数(大きいものからn個，指定しないなら0)
+max_extraction: 2
+
+
+### パス関係
+# キャッシュが置かれている絶対パス
+# cache_dir: /home/akisute/.mozilla/firefox/ijq290rk.default/Cache
+cache_dir: /home/akisute/program/cache_extractor/test/polipo_cache
+
+# 抽出先のパス
+extracted_dir: /home/akisute/program/cache_extractor/test/extracted_cache
+
+
+### polipo用オプション(使用しなければ全要素コメントアウト)
+# 抽出サイト(ディレクトリに一致する正規表現を記述)
+website:
+  - \.c.youtube\.com            # youtube の例
+  - veoh-\d{3}\.vo\.llnwd\.net  # veoh の例
+  - smile-pow\d{2}\.nicovideo\.jp # niconico の例
+# 抽出するファイルの種類(flv, mp4, Video, etc...)
+content_type:
+  # - video
